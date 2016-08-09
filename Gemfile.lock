@@ -38,13 +38,10 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.3)
     bcrypt (3.1.11)
-<<<<<<< HEAD
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
-=======
->>>>>>> 3af49d2c8649cdab5617963df35daea2d0383a2c
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -53,11 +50,8 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
-<<<<<<< HEAD
     cocoon (1.2.9)
     coderay (1.1.1)
-=======
->>>>>>> 3af49d2c8649cdab5617963df35daea2d0383a2c
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
