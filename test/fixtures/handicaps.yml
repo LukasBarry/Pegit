@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  score: 1
+  course_rating: 1
+  course_slope_rating: 1
+  user_id: 
+
+two:
+  score: 1
+  course_rating: 1
+  course_slope_rating: 1
+  user_id: 
