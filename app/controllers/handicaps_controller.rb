@@ -34,6 +34,10 @@ class HandicapsController < ApplicationController
   private
 
   def set_handicap
+    @handicap = Handicap.find(params[:id])
+  end
+
+  def handicap_params
     params.require(:handicap).permit(:score, :course_rating, :course_slope_rating)
   end
 end
