@@ -6,6 +6,8 @@ class HandicapsController < ApplicationController
     @handicap = Handicap.new
   end
   def show
+    @handicap_calculator = HandicapCalculator.new(:user_id) #or should this be 'current_user'?
+    @handicap_index = @handicap_calculator.get_handicap_index
   end
   def index
   end
@@ -38,6 +40,6 @@ class HandicapsController < ApplicationController
   end
 
   def handicap_params
-    params.require(:handicap).permit(:score, :course_rating, :course_slope_rating)
+    params.require(:handicap).permit(:score, :course_rating, :course_slope_rating, :user_id)
   end
 end
