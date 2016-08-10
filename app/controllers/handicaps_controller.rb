@@ -6,15 +6,13 @@ class HandicapsController < ApplicationController
     @handicap = Handicap.new
   end
   def show
-    @handicap_calculator = HandicapCalculator.new(:user_id) #or should this be 'current_user'?
-    @handicap_index = @handicap_calculator.get_handicap_index
   end
   def index
   end
   def create
     @handicap = Handicap.new(handicap_params)
     if @handicap.save
-      redirect_to @handicap, notice: "saved."
+      redirect_to request.referrer, notice: "saved."
     else
       render :new
     end
@@ -22,7 +20,7 @@ class HandicapsController < ApplicationController
 
   def update
     if @handicap.update(handicap_params)
-      redirect_to @handicap, notice: "updated"
+      redirect_to request.referrer, notice: "updated"
     else
       render :edit
     end
