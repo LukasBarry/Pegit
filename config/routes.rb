@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  get 'profiles/show'
-  root 'profiles#index'
+  get 'meetups/feed'
 
+  get 'profiles/:id' => 'profiles#show', as: :profile
+  root 'profiles#index'
+  resources :handicaps
   devise_for :users
 
 end

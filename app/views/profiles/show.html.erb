@@ -1,4 +1,58 @@
+<<<<<<< HEAD
 <div class="row">
   <div class= "col-xs-3 panel panel-default">
     <div class="panel-body">
     </div>
+=======
+    <div class="row">
+      <div class="col-md-3">
+       <div class="panel panel-default">
+         <div class="panel-heading">
+          <% if @user.avatar_file_name != nil %>
+            <%= image_tag @user.avatar.url(:thumb) %>
+          <% end %>
+          <h4><%= @user.username %></h4>
+        </div>
+        <div class="panel-body">
+          <h5><p><%= @user.bio %></p></h5>
+          <h5><%= @user.location %></h5>
+          <h5>Joined on <%= @user.created_at.strftime("%B %Y") %></h5>
+        </div>
+        <div class="panel-footer">
+          <% if user_signed_in? && current_user.id != @user.id  %>
+<!-- options and stuff here  -->
+          <% end %>
+          <% if user_signed_in? && current_user.id == @user.id %>
+<!-- more options here -->
+            <%= link_to 'Edit Profile', edit_user_registration_path(@user), class:"btn btn-default" %>
+          <% end %>
+        </div>
+       </div>
+      </div>
+
+     <div class="col-xs-1"></div>
+
+     <div class="col-md-4">
+       <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Current Pegit Index</h4>
+          <h4><em><%= @handicap_index %></em></h4>
+        </div>
+        <div class="panel-body">
+          <% @my_score_cards.each do |card| %>
+              <div class="well">
+               <%= card.created_at.strftime("%B %Y") %><br />
+               Score: <%= card.score %> <br>
+               Course Rating: <%= card.course_rating %><br />
+               Slope Rating: <%= card.course_slope_rating %><br />
+              </div>
+          <% end %>
+        </div>
+       </div>
+     </div>
+
+    <div class="col-xs-1"></div>
+
+    <%= render 'handicaps/form' %>
+  </div>
+>>>>>>> 5ce4accd1c49fb9a55d331ac9e957479502602a1
