@@ -15,9 +15,10 @@ ActiveRecord::Schema.define(version: 20160810150125) do
 
   create_table "handicaps", force: :cascade do |t|
     t.integer  "score"
-    t.integer  "course_rating"
+    t.decimal  "course_rating"
     t.integer  "course_slope_rating"
     t.integer  "user_id"
+    t.text     "description"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
