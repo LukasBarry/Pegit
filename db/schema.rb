@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20160810150125) do
   create_table "meetups", force: :cascade do |t|
     t.datetime "datetime"
     t.text     "description"
-    t.integer  "user_id_id"
+    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
