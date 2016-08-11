@@ -20,7 +20,7 @@ class MeetupsController < ApplicationController
   def create
     @meetup = Meetup.new(meetup_params)
     if @meetup.save
-      redirect_to @meetup, notice: "You just created a Meetup!"
+      redirect_to feed_path, notice: "You just created a Meetup!"
     else
       render :new
     end
@@ -28,6 +28,7 @@ class MeetupsController < ApplicationController
 
   def feed
     # @meetup = Meetup.where("user_id in (?) OR user_id = ?", current_user).order('created_at DESC')
+    @meetups = Meetup.all
     @meetup = Meetup.new
   end
 

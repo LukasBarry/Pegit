@@ -1,2 +1,9 @@
 <h1>Meetup Board</h1>
 <p>Find me in app/views/meetups/feed.html.erb</p>
+
+
+<% @meetups.each do |meetup| %>
+<%= meetup.user.email %>
+<%= meetup.datetime %>
+<%= meetup.description %>
+<% end %>
