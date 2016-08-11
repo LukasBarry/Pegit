@@ -1,5 +1,5 @@
 class MeetupsController < ApplicationController
-  before_action :set_meetup, only: [:show, :edit, :update, :destroy]
+  before_action :set_meetup, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
 
   def new
@@ -27,7 +27,7 @@ class MeetupsController < ApplicationController
   end
 
   def feed
-    @meetup = Meetup.where("user_id in (?) OR user_id = ?", current_user).order('created_at DESC')
+    # @meetup = Meetup.where("user_id in (?) OR user_id = ?", current_user).order('created_at DESC')
     @meetup = Meetup.new
   end
 
