@@ -14,7 +14,7 @@ class HandicapCalculator
 
     @needed_differentials = []
     if my_handicap_differentials.length <= 6
-      @needed_differentials = my_handicap_differentials.shift
+      @needed_differentials << my_handicap_differentials.shift
     elsif my_handicap_differentials.length <= 8
       @needed_differentials << my_handicap_differentials.shift(2)
     elsif my_handicap_differentials.length <= 10
