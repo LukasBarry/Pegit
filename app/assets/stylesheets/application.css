@@ -20,3 +20,8 @@
 body {
   background-image: url(http://www.golftripper.com/wp-content/uploads/2011/06/Eagle-Point-Golf-Club-Hole-17-1-copy.jpg);
 }
+
+body {
+  color: blue;
+  text-align: center;
+  }
