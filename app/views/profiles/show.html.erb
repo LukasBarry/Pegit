@@ -1,11 +1,11 @@
    <div class="row">
-      <div class="col-md-3">
-       <div class="panel panel-default">
+      <div class="col-md-4">
+       <div class="panel panel-transparent">
          <div class="panel-heading">
           <% if @user.avatar_file_name != nil %>
             <%= image_tag @user.avatar.url(:thumb) %>
           <% end %>
-          <h4><%= @user.username %></h4>
+          <h4 align="center"><em><%= @user.username %></em></h4>
         </div>
         <div class="panel-body">
           <h5><p><%= @user.bio %></p></h5>
@@ -13,12 +13,15 @@
           <h5>Joined on <%= @user.created_at.strftime("%B %Y") %></h5>
         </div>
         <div class="panel-footer">
-          <% if user_signed_in? && current_user.id != @user.id  %>
+          <% if current_user.id != @user.id  %>
 <!-- options and stuff here  -->
           <% end %>
-          <% if user_signed_in? && current_user.id == @user.id %>
+          <% if current_user.id == @user.id %>
 <!-- more options here -->
-            <%= link_to 'Edit Profile', edit_user_registration_path(@user), class:"btn btn-default" %>
+            <div class="button-group">
+              <%= link_to 'Edit Profile', edit_user_registration_path(@user), class:"btn btn-default" %>
+              <%= link_to 'New PegUp', new_meetup_path, class:"btn btn-default" %>
+            </div>
           <% end %>
         </div>
        </div>
@@ -27,25 +30,62 @@
      <div class="col-xs-1"></div>
 
      <div class="col-md-4">
-       <div class="panel panel-default">
+       <div class="panel panel-transparent">
         <div class="panel-heading">
-          <h4>Current Pegit Index</h4>
-          <h4><em><%= @handicap_index %></em></h4>
+          <h4 align="center">Current Pegit Index</h4>
+          <h4 align="center"><em><%= @handicap_index %></em></h4>
         </div>
-        <div class="panel-body">
-          <% @my_score_cards.each do |card| %>
-              <div class="well">
-               <%= card.created_at.strftime("%B %Y") %><br />
-               Score: <%= card.score %> <br>
-               Course Rating: <%= card.course_rating %><br />
-               Slope Rating: <%= card.course_slope_rating %><br />
-              </div>
-          <% end %>
-        </div>
+        <% if current_user.id == @user.id %>
+          <div class="panel-body">
+            <% @my_score_cards.each do |card| %>
+                <div class="well">
+                 <%= card.created_at.strftime("%B %Y") %><br />
+                 <strong><%= card.description %></strong><br>
+                 Score: <%= card.score %> <br>
+                 Course Rating: <%= card.course_rating %><br />
+                 Slope Rating: <%= card.course_slope_rating %><br />
+                </div>
+            <% end %>
+          </div>
+        <% end %>
        </div>
      </div>
 
-    <div class="col-xs-1"></div>
+     <div class="col-xs-1"></div>
 
-    <%= render 'handicaps/form' %>
+       <% if current_user.id == @user.id %>
+       <a data-toggle="modal" data-target="#scorecard" class="btn btn-default">Submit a New Score Card </a>
+       <% end %>
   </div>
+
+       <div class="modal fade" id="scorecard" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+               <%= render 'handicaps/form' %>
+             </div>
+           </div>
+         </div>
+
+<% if current_user.id == @user.id %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-transparent">
+        <% unless @my_meetups == nil %>
+          <div class="panel-heading">
+            <h4 align="center">Planned PegUps (<em><%= @my_meetups.count %></em>)</h4>
+          </div>
+          <div class="panel-body">
+            <% @my_meetups.each do |meetup| %>
+              <div class="well">
+                <em><%= meetup.datetime %></em><br>
+                <%= meetup.description %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="panel-footer">
+          <%= link_to 'PegUps Feed', feed_path, class:"btn btn-default" %>
+        </div>
+      </div>
+   </div>
+<% end %>

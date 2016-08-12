@@ -1,6 +1,6 @@
 class HandicapsController < ApplicationController
   before_action :set_handicap, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   def new
     @handicap = Handicap.new
@@ -8,6 +8,7 @@ class HandicapsController < ApplicationController
   def show
   end
   def index
+    @meetups = Meetup.all
   end
   def create
     @handicap = Handicap.new(handicap_params)
@@ -38,6 +39,6 @@ class HandicapsController < ApplicationController
   end
 
   def handicap_params
-    params.require(:handicap).permit(:score, :course_rating, :course_slope_rating, :user_id)
+    params.require(:handicap).permit(:score, :course_rating, :course_slope_rating, :user_id, :description)
   end
 end

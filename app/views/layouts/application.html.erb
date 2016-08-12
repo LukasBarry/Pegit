@@ -29,14 +29,17 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            <li><% if user_signed_in? %>
-                   <%= link_to 'My PegBoard', profile_path(current_user), class:"navbar-link" %>
-                <% else %>
-                  <%= link_to 'Sign In', new_user_session_path, class:"navbar-link" %>
-                <% end %>
+          <ul class="nav navbar-nav">
+            <% if user_signed_in? %>
+
+            <li><%= link_to 'My PegBoard', profile_path(current_user), class:"navbar-link" %></li>
+            <li><%= link_to "Meetup Feed", feed_path %></li>
+        <% else %>
+            <li>
+              <%= link_to 'Sign In', new_user_session_path, class:"navbar-link" %>
             </li>
-          <li><%= link_to "Meetup Feed", feed_path %></li>
+            <% end %>
+
         </ul>
         <form class="navbar-form navbar-left">
           <div class="form-group">
@@ -45,8 +48,14 @@
           <button type="submit" class="btn btn-default">Submit</button>
         </form>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li>
+                <%= link_to 'Sign Up', new_user_registration_path, calss:"navbar-link" %>
+              </li>
+            <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
