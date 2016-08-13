@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :handicaps
   has_many :meetups
+  has_many :partners
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>", :small => "50x50" }, :default_url => "/images/drvl.png"
 
@@ -12,6 +13,10 @@ class User < ActiveRecord::Base
   before_validation { avatar.clear if remove_avatar == '1' }
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
+  def partner?(meetup)
+    meetup.partners.where(user_id: id).any?
+  end
 
 
 end

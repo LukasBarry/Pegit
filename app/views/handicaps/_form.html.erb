@@ -4,7 +4,6 @@
   <% if @handicap.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@handicap.errors.count, "error") %> prohibited this handicap from being saved:</h2>
-
       <ul>
         <% @handicap.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -12,39 +11,38 @@
       </ul>
     </div>
   <% end %>
-       <div class="col-md-8">
-         <div class="panel panel-transparent">
-           <div class="panel-heading">
-             <h2 align="center">New Score Card</h2>
-           </div>
-           <div class="panel-body">
-            <div class="form-group">
-            <%= f.label "Score" %><br>
-            <%= f.number_field :score, class:"form-control", autofocus: true %>
-          </div>
-          <div class="form-group">
-            <%= f.label "Course Rating" %><br>
-            <%= f.number_field :course_rating, step: 0.1, class:"form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label "Slope Rating" %><br>
-            <%= f.number_field :course_slope_rating, class:"form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label "Description" %><br>
-            <%= f.text_area :description, class:"form-control", rows: 3 %>
-          </div>
-          <div class="cant-see-me">
-            <%= f.number_field :user_id, value: current_user.id %>
-          </div>
-        </div>
 
-          <div class="panel-footer">
-            <div class="action-group">
-              <%= f.submit "PegIt", class:"btn btn-default"%>
-            </div>
-          </div>
+  <div class="col-md-8">
+    <div class="panel panel-transparent">
+      <div class="panel-heading">
+        <h2 align="center">New Score Card</h2>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <%= f.label "Score" %><br>
+          <%= f.number_field :score, class:"form-control", autofocus: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label "Course Rating" %><br>
+          <%= f.number_field :course_rating, step: 0.1, class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label "Slope Rating" %><br>
+          <%= f.number_field :course_slope_rating, class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label "Description" %><br>
+          <%= f.text_area :description, class:"form-control", rows: 3 %>
+        </div>
+        <div class="cant-see-me">
+          <%= f.number_field :user_id, value: current_user.id %>
         </div>
       </div>
-
+      <div class="panel-footer">
+        <div class="action-group">
+          <%= f.submit "PegIt", class:"btn btn-default"%>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

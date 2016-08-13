@@ -16,6 +16,14 @@
               <em><strong><%= meetup.user.username %></strong></em><br />
               <em><%= meetup.datetime.strftime("%b %-d, %Y") %></em><br />
               <p><%= meetup.description %></p>
+              <p><%= meetup.partners.count + 1 %> attending</p>
+              <% if user_signed_in? && meetup.user_id != current_user.id%>
+                <% if current_user.partner?(meetup) %>
+                  <%= link_to "Un-Join this PegUp", meetup_partner_path(meetup), method: :delete, class:"btn btn-default" %>
+                <% else %>
+                  <%= link_to "Join this PegUp", meetup_partner_path(meetup), method: :post, class:"btn btn-default" %>
+                <% end %>
+              <% end %>
             </div>
           <% end %>
         </div>
@@ -38,6 +46,12 @@
               <div class="well">
                 <em><%= meetup.datetime.strftime("%b %-d, %Y")  %></em><br>
                 <%= meetup.description %>
+                Attending:
+                <% meetup.partners.each do |partner| %>
+                <br />
+                  <%= partner.user.username %>
+                <br />
+                <% end %>
               </div>
             <% end %>
           <% end %>

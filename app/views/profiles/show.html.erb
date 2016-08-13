@@ -71,10 +71,14 @@
     <div class="col-md-12">
       <div class="panel panel-transparent">
         <% unless @my_meetups == nil %>
-          <div class="panel-heading">
-            <h4 align="center">Planned PegUps (<em><%= @my_meetups.count %></em>)</h4>
-            <span align="right"><%= link_to 'New PegUp', new_meetup_path, class:"btn btn-default" %></span>
-          </div>
+        <div class="panel-heading" role="tab" id="headingThree">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            My PegUps(<%= @my_meetups.count %>)
+            </a>
+          </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
           <div class="panel-body">
             <% @my_meetups.each do |meetup| %>
               <div class="well">
@@ -83,10 +87,12 @@
               </div>
             <% end %>
           </div>
+        </div>
         <% end %>
         <div class="panel-footer">
           <%= link_to 'PegUps Feed', feed_path, class:"btn btn-default" %>
         </div>
       </div>
    </div>
+ </div>
 <% end %>

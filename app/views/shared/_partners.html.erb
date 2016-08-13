@@ -1,0 +1,15 @@
+
+  <% if current_user.partner?(meetup) %>
+    <%= link_to "Un-Join", meetup_partner_path(meetup), method: :delete, class:"btn btn-default" %>
+  <% else %>
+    <%= link_to "Join", meetup_partner_path(meetup), method: :post, class:"btn btn-default" %>
+  <% end %>
+
+<%= meetup.partners.count %>
+
+Attending:
+<% meetup.partners.each do |partner| %>
+<br />
+  <%= partner.user.username %>
+<br />
+<% end %>
