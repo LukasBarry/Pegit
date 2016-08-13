@@ -1,9 +1,50 @@
-<h1>Meetup Board</h1>
-<p>Find me in app/views/meetups/feed.html.erb</p>
-
-
-<% @meetups.each do |meetup| %>
-<%= meetup.user.email %>
-<%= meetup.datetime %>
-<%= meetup.description %>
-<% end %>
+<div class="row">
+  <div class="col-md-10">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-transparent">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse"    data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          All PegUps (<em><%= @all_meetups.count %></em>)
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+          <% @all_meetups.each do |meetup| %>
+            <div class="well">
+              <em><strong><%= meetup.user.username %></strong></em><br />
+              <em><%= meetup.datetime.strftime("%b %-d, %Y") %></em><br />
+              <p><%= meetup.description %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% if user_signed_in? && current_user.id == @user.id %>
+    <div class="panel panel-transparent">
+      <div class="panel-heading" role="tab" id="headingTwo">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          My PegUps
+          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body">
+          <%= link_to 'Create New PegUp', new_meetup_path, class:"btn btn-default" %><br>
+          <% unless @my_meetups == nil %>
+            <% @my_meetups.each do |meetup| %>
+              <div class="well">
+                <em><%= meetup.datetime.strftime("%b %-d, %Y")  %></em><br>
+                <%= meetup.description %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        </div>
+      </div>
+  <% end %>
+    </div>
+  </div>
+</div>
