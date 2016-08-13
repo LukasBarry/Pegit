@@ -17,9 +17,10 @@
            <div class="panel-heading">
              <h2 align="center">New Score Card</h2>
            </div>
-          <div class="form-group">
+           <div class="panel-body">
+            <div class="form-group">
             <%= f.label "Score" %><br>
-            <%= f.number_field :score, class:"form-control" %>
+            <%= f.number_field :score, class:"form-control", autofocus: true %>
           </div>
           <div class="form-group">
             <%= f.label "Course Rating" %><br>
@@ -36,6 +37,8 @@
           <div class="cant-see-me">
             <%= f.number_field :user_id, value: current_user.id %>
           </div>
+        </div>
+
           <div class="panel-footer">
             <div class="action-group">
               <%= f.submit "PegIt", class:"btn btn-default"%>

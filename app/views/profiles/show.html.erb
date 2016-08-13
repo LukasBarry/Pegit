@@ -39,7 +39,7 @@
           <div class="panel-body">
             <% @my_score_cards.each do |card| %>
                 <div class="well">
-                 <%= card.created_at.strftime("%B %Y") %><br />
+                 <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
                  <strong><%= card.description %></strong><br>
                  Score: <%= card.score %> <br>
                  Course Rating: <%= card.course_rating %><br />
@@ -54,7 +54,7 @@
      <div class="col-xs-1"></div>
 
        <% if current_user.id == @user.id %>
-       <a data-toggle="modal" data-target="#scorecard" class="btn btn-default">Submit a New Score Card </a>
+       <a data-toggle="modal" data-target="#scorecard" class="btn btn-default">Create a new score card </a>
        <% end %>
   </div>
 
@@ -73,11 +73,12 @@
         <% unless @my_meetups == nil %>
           <div class="panel-heading">
             <h4 align="center">Planned PegUps (<em><%= @my_meetups.count %></em>)</h4>
+            <span align="right"><%= link_to 'New PegUp', new_meetup_path, class:"btn btn-default" %></span>
           </div>
           <div class="panel-body">
             <% @my_meetups.each do |meetup| %>
               <div class="well">
-                <em><%= meetup.datetime %></em><br>
+                <em><%= meetup.datetime.strftime("%b %-d, %Y")  %></em><br>
                 <%= meetup.description %>
               </div>
             <% end %>

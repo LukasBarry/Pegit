@@ -28,12 +28,13 @@ class MeetupsController < ApplicationController
 
   def feed
     if user_signed_in?
-      @user_meetups = Meetup.my_meetups(current_user)
+      @my_meetups = Meetup.my_meetups(current_user).order('created_at DESC')
       @meetup = Meetup.new
+      @user = User.find(user_id = current_user.id )
 
-    end
+     end
     # @meetup = Meetup.where("user_id in (?) OR user_id = ?", current_user).order('created_at DESC')
-    @meetups = Meetup.all
+    @all_meetups = Meetup.all.order('created_at DESC')
   end
 
   private
