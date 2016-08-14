@@ -43,8 +43,8 @@ class MeetupsController < ApplicationController
     @meetup = Meetup.find(params[:id])
   end
 
- def meetup_params
+  def meetup_params
     params.require(:meetup).permit(:datetime, :description, :user_id)
- end
+  end
 
 end
