@@ -2,6 +2,7 @@ class HandicapsController < ApplicationController
   before_action :set_handicap, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
+
   def new
     @handicap = Handicap.new
   end
@@ -15,7 +16,7 @@ class HandicapsController < ApplicationController
     if @handicap.save
       redirect_to request.referrer, notice: "saved."
     else
-      render :new
+      redirect_to request.referrer
     end
   end
 
@@ -23,7 +24,7 @@ class HandicapsController < ApplicationController
     if @handicap.update(handicap_params)
       redirect_to request.referrer, notice: "updated"
     else
-      render :edit
+      redirect_to request.referrer
     end
   end
 

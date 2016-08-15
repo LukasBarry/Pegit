@@ -33,7 +33,7 @@
             <% if user_signed_in? %>
 
             <li><%= link_to 'My PegBoard', profile_path(current_user), class:"navbar-link" %></li>
-            <li><%= link_to "Meetup Feed", feed_path %></li>
+            <li><%= link_to "PegUp Feed", feed_path %></li>
         <% else %>
             <li>
               <%= link_to 'Sign In', new_user_session_path, class:"navbar-link" %>
