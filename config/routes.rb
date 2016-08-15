@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'profiles/:id' => 'profiles#show', as: :profile
-  root 'profiles#index'
+  root 'handicaps#index'
   get 'feed' => 'meetups#feed'
   resources :meetups, except: [:show]
   resources :handicaps
