@@ -17,6 +17,6 @@ class User < ActiveRecord::Base
   def partner?(meetup)
     meetup.partners.where(user_id: id).any?
   end
-
+  
 
 end
