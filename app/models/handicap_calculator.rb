@@ -7,10 +7,10 @@ class HandicapCalculator
     my_handicaps = Handicap.my_handicaps(@user)
     my_handicap_differentials = []
     my_handicaps.each do |handicap|
-      differential = ((handicap.score - handicap.course_rating) * 113) / handicap.course_slope_rating
-      my_handicap_differentials << differential
-      my_handicap_differentials = my_handicap_differentials.sort!
+      my_handicap_differentials << handicap.differential
     end
+
+    my_handicap_differentials = my_handicap_differentials.sort!
 
     needed_differentials = []
     if my_handicap_differentials.length <= 6
@@ -34,8 +34,14 @@ class HandicapCalculator
     else
       needed_differentials = my_handicap_differentials.shift(10)
     end
+
     average_differential = (needed_differentials.reduce(:+)) / (needed_differentials.length)
-    @handicap_index = (average_differential * 0.96).round(2)
+    handicap_index = (average_differential * 0.96).round(2)
+    return handicap_index, needed_differentials.length 
   end
 
+  def all_recent
+    my_scorecards = Handicap.my_handicaps(@user)
+    my_scorecards.reverse.shift(20)
+  end
 end

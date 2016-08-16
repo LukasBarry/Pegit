@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160813185601) do
+ActiveRecord::Schema.define(version: 20160816155237) do
 
   create_table "handicaps", force: :cascade do |t|
     t.integer  "score"
-    t.integer  "course_rating"
+    t.decimal  "course_rating"
     t.integer  "course_slope_rating"
     t.integer  "user_id"
+    t.text     "description"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.decimal  "differential"
   end
 
   add_index "handicaps", ["user_id"], name: "index_handicaps_on_user_id"

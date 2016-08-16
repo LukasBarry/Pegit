@@ -25,87 +25,13 @@
         <% end %>
       </div>
     </div>
-
-    <% if current_user.id == @user.id && @my_meetups != nil %>
-      <div class="panel panel-transparent">
-          <div class="panel-heading" role="tab" id="headingOne">
-            <h4 class="panel-title">
-              <a class="collapsed" role="button"  data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-              My PegUps(<%= @my_meetups.count %>)
-              </a>
-            </h4>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-            <div class="panel-body">
-              <% @my_meetups.each do |meetup| %>
-                <div class="well">
-                  <em><%= meetup.datetime.strftime("%b %-d, %Y")  %></em><br>
-                  <%= meetup.description %>
-                </div>
-              <% end %>
-            </div>
-          </div>
-          <div class="panel-footer">
-            <%= link_to 'PegUps Feed', feed_path, class:"btn btn-default" %>
-          </div>
-      </div>
-    <% end %>
   </div>
-
-  <div class="col-xs-1"></div>
-
+<div class="col-xs-1"></div>
   <div class="col-md-4">
     <div class="panel panel-transparent">
       <h4 align="center">Current Pegit Index</h4>
       <h4 align="center"><em><%= @handicap_index %></em></h4>
     </div>
-    <% if current_user.id == @user.id %>
-    <div class="panel panel-transparent">
-      <div class="panel-heading" role="tab" id="headingQ">
-        <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseQ" aria-expanded="false" aria-controls="collapseQ">Show Scorecards</a>
-        </h4>
-      </div>
-      <div id="collapseQ" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingQ">
-        <div class="panel-body">
-          <% @my_first_five_cards.each do |card| %>
-          <div class="well">
-            <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
-            <strong><%= card.description %></strong><br>
-            Score: <%= card.score %> <br>
-            Course Rating: <%= card.course_rating %><br />
-            Slope Rating: <%= card.course_slope_rating %><br />
-          </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <% @my_chopped_scorecards.each_with_index do |five, i| %>
-    <div class="panel panel-transparent">
-      <div class="panel-heading" role="tab" id="heading<%= i %>">
-        <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>" aria-expanded="false" aria-controls="collapse<%= i %>">More</a>
-        </h4>
-      </div>
-      <div id="collapse<%= i %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= i %>">
-      <div class="panel-body">
-        <% five.each do |card| %>
-          <div class="well">
-            <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
-            <strong><%= card.description %></strong><br>
-            Score: <%= card.score %> <br>
-            Course Rating: <%= card.course_rating %><br />
-            Slope Rating: <%= card.course_slope_rating %><br />
-          </div>
-        <% end %>
-      </div>
-      </div>
-    </div>
-    <% end %>
-    <% end %>
-  </div>
-  <div class="col-xs-1"></div>
-  <div class="col-md-2">
     <% if current_user.id == @user.id %>
       <a data-toggle="modal" data-target="#scorecard" class="btn btn-default">Create a new score card </a>
       <div class="modal fade" id="scorecard" tabindex="-1" role="dialog">
@@ -117,4 +43,80 @@
       </div>
     <% end %>
   </div>
+  <div class="col-xs-1"></div>
+  <% if current_user.id == @user.id && @my_meetups != nil %>
+  <div class="col-md-3">
+    <div class="panel panel-transparent">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button"  data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          My PegUps(<%= @my_meetups.count %>)
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+          <% @my_meetups.each do |meetup| %>
+            <div class="well">
+              <em><%= meetup.datetime.strftime("%b %-d, %Y")  %></em><br>
+              <%= meetup.description %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <%= link_to 'PegUps Feed', feed_path, class:"btn btn-default" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
 </div>
+<% if current_user.id == @user.id  %>
+<% unless @all_my_scorecards == nil %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-transparent">
+      <div class="panel-heading">
+        Relevant Scorecards
+      </div>
+      <% @lowest_scorecards.each do |card| %>
+      <div class="col-md-2">
+        <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
+        <strong><%= card.description %></strong><br>
+        <%= card.id %>
+        Score: <%= card.score %> <br>
+        Course Rating: <%= card.course_rating %><br />
+        Slope Rating: <%= card.course_slope_rating %><br />
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-transparent">
+      <div class="panel-heading" role="tab" id="headingQ">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseQ" aria-expanded="false" aria-controls="collapseQ">Show All</a>
+        </h4>
+      </div>
+      <div id="collapseQ" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingQ">
+        <div class="panel-body">
+          <% @scorecards.each do |card| %>
+          <div class="col-md-2">
+            <%= card.id %>
+            <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
+            <strong><%= card.description %></strong><br>
+            Score: <%= card.score %> <br>
+            Course Rating: <%= card.course_rating %><br />
+            Slope Rating: <%= card.course_slope_rating %><br />
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <% end %>
+  <% end %>
