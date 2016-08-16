@@ -39,3 +39,8 @@ body {
 #scorecard {
   outline: none;
 }
+
+body {
+  color: blue;
+  text-align: center;
+  }
