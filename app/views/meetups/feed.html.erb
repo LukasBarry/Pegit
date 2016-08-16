@@ -40,7 +40,9 @@
       </div>
       <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
         <div class="panel-body">
-          <%= link_to 'Create New PegUp', new_meetup_path, class:"btn btn-default" %><br>
+          <%= link_to 'Create New PegUp', new_meetup_path, class:"btn btn-default" %>
+          <br />
+          <br />
           <% unless @my_meetups == nil %>
             <% @my_meetups.each do |meetup| %>
               <div class="well">
@@ -49,7 +51,7 @@
                 Attending:
                 <% meetup.partners.each do |partner| %>
                 <br />
-                  <%= partner.user.username %>
+                  <%= link_to partner.user.username, profile_path(partner.user) %>
                 <br />
                 <% end %>
               </div>
