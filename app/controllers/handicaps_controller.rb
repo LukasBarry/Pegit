@@ -1,4 +1,4 @@
-class HandicapsController < ApplicationController
+class HandicapsController < ApplicationController  
   before_action :set_handicap, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
@@ -13,6 +13,7 @@ class HandicapsController < ApplicationController
   end
   def create
     @handicap = Handicap.new(handicap_params)
+
     if @handicap.save
       redirect_to request.referrer, notice: "saved."
     else
@@ -40,6 +41,6 @@ class HandicapsController < ApplicationController
   end
 
   def handicap_params
-    params.require(:handicap).permit(:score, :course_rating, :course_slope_rating, :user_id, :description)
+    params.require(:handicap).permit(:score, :course_rating, :course_slope_rating, :user_id, :description, :differential)
   end
 end

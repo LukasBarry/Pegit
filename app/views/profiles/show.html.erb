@@ -70,20 +70,41 @@
     </div>
   </div>
   <% end %>
-
-<% if current_user.id == @user.id %>
+</div>
+<% if current_user.id == @user.id  %>
+<% unless @all_my_scorecards == nil %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-transparent">
+      <div class="panel-heading">
+        Relevant Scorecards
+      </div>
+      <% @lowest_scorecards.each do |card| %>
+      <div class="col-md-2">
+        <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
+        <strong><%= card.description %></strong><br>
+        <%= card.id %>
+        Score: <%= card.score %> <br>
+        Course Rating: <%= card.course_rating %><br />
+        Slope Rating: <%= card.course_slope_rating %><br />
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-transparent">
       <div class="panel-heading" role="tab" id="headingQ">
         <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseQ" aria-expanded="false" aria-controls="collapseQ">Show Scorecards</a>
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseQ" aria-expanded="false" aria-controls="collapseQ">Show All</a>
         </h4>
       </div>
       <div id="collapseQ" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingQ">
         <div class="panel-body">
-          <% @my_first_five_cards.each do |card| %>
+          <% @scorecards.each do |card| %>
           <div class="col-md-2">
+            <%= card.id %>
             <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
             <strong><%= card.description %></strong><br>
             Score: <%= card.score %> <br>
@@ -96,30 +117,6 @@
     </div>
   </div>
 </div>
-  <% @my_chopped_scorecards.each_with_index do |five, i| %>
-  <div class="row">
-   <div class="col-md-12">
-    <div class="panel panel-transparent">
-      <div class="panel-heading" role="tab" id="heading<%= i %>">
-        <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>" aria-expanded="false" aria-controls="collapse<%= i %>">More</a>
-        </h4>
-      </div>
-      <div id="collapse<%= i %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= i %>">
-      <div class="panel-body">
-        <% five.each do |card| %>
-          <div class="col-md-2">
-            <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
-            <strong><%= card.description %></strong><br>
-            Score: <%= card.score %> <br>
-            Course Rating: <%= card.course_rating %><br />
-            Slope Rating: <%= card.course_slope_rating %><br />
-          </div>
-        <% end %>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
-<% end %>
-<% end %>
+
+  <% end %>
+  <% end %>
