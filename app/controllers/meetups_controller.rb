@@ -25,9 +25,9 @@ class MeetupsController < ApplicationController
       render :new
     end
   end
+
   def show
     @meetup = Meetup.find(params[:id])
-
     @comment = Comment.new
   end
 

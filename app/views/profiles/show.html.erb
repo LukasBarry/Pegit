@@ -60,7 +60,8 @@
             <div class="well">
               <em><%= meetup.datetime.strftime("%b %-d, %Y")  %></em><br>
               <%= meetup.description %>
-              Attending:
+              <br />
+              <strong>Attending:</strong>
               <% meetup.partners.each do |partner| %>
               <br />
                 <%= link_to partner.user.username, profile_path(partner.user) %>

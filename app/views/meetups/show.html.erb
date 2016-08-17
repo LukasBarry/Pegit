@@ -3,7 +3,7 @@
    <div class="panel panel-transparent">
     <div class="panel-body">
       <h2>Meetup</h2>
-      <h4><%= @meetup.user.username %></h4>
+      <h4><%= link_to @meetup.user.username, profile_path(@meetup.user) %></h4>
       <%= @meetup.datetime %><br />
       <%= @meetup.description %>
       <p><%= @meetup.partners.count + 1 %> attending</p>
@@ -22,7 +22,7 @@
       <% @meetup.comments.each do |comment| %>
       <div class="well">
         <p><%= comment.body %></p>
-        by: <em><%= comment.user.username %></em>
+        by: <em><%= link_to comment.user.username, profile_path(comment.user) %></em>
         <% if current_user.id == comment.user.id %>
             <%= link_to 'Edit', edit_meetup_comment_path(@meetup, comment), class:"btn btn-primary" %>
          <% end %>

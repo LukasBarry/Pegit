@@ -13,12 +13,13 @@
         <div class="panel-body">
           <% @all_meetups.each do |meetup| %>
             <div class="well">
-              <em><strong><%= meetup.user.username %></strong></em><br />
+              <h4><strong><%= link_to meetup.user.username, profile_path(meetup.user) %></strong></h4>
               <em><%= meetup.datetime.strftime("%b %-d, %Y") %></em><br />
               <p><%= meetup.description %></p>
+              <br />
               <%= link_to 'details', meetup, class:"btn btn-default" %>
               <br />
-              <p><%= meetup.partners.count + 1 %> attending</p>
+              <p><strong><%= meetup.partners.count + 1 %> attending</strong></p>
               <% if user_signed_in? && meetup.user_id != current_user.id%>
                 <% if current_user.partner?(meetup) %>
                   <%= link_to "Un-Join this PegUp", meetup_partner_path(meetup), method: :delete, class:"btn btn-default" %>
@@ -50,14 +51,14 @@
               <div class="well">
                 <em><%= meetup.datetime.strftime("%b %-d, %Y")  %></em><br>
                 <%= meetup.description %><br />
-                <%= meetup.description %><br>
                 <%= link_to 'details', meetup, class:"btn btn-default" %>
-                Attending:
+                <br />
+                <strong>Attending:</strong>
                 <% meetup.partners.each do |partner| %>
                 <br />
                   <%= link_to partner.user.username, profile_path(partner.user) %>
-                <br />
                 <% end %>
+                <br />
                 <%= meetup.comments.count %> comments
               </div>
             <% end %>
