@@ -50,7 +50,7 @@
       <div class="panel-heading" role="tab" id="headingOne">
         <h4 class="panel-title">
           <a class="collapsed" role="button"  data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          My PegUps(<%= @my_meetups.count %>)
+          My PegUps (<%= @my_meetups.count %>)
           </a>
         </h4>
       </div>
@@ -60,6 +60,12 @@
             <div class="well">
               <em><%= meetup.datetime.strftime("%b %-d, %Y")  %></em><br>
               <%= meetup.description %>
+              Attending:
+              <% meetup.partners.each do |partner| %>
+              <br />
+                <%= link_to partner.user.username, profile_path(partner.user) %>
+              <br />
+              <% end %>
             </div>
           <% end %>
         </div>

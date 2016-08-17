@@ -49,9 +49,9 @@
             <% @my_meetups.each do |meetup| %>
               <div class="well">
                 <em><%= meetup.datetime.strftime("%b %-d, %Y")  %></em><br>
+                <%= meetup.description %><br />
                 <%= meetup.description %><br>
                 <%= link_to 'details', meetup, class:"btn btn-default" %>
-
                 Attending:
                 <% meetup.partners.each do |partner| %>
                 <br />
