@@ -25,15 +25,20 @@ class MeetupsController < ApplicationController
       render :new
     end
   end
+  def show
+    @meetup = Meetup.find(params[:id])
+
+    @comment = Comment.new
+  end
+
 
   def feed
     if user_signed_in?
       @my_meetups = Meetup.my_meetups(current_user).order('created_at DESC')
       @meetup = Meetup.new
       @user = User.find(user_id = current_user.id )
-
-     end
-    # @meetup = Meetup.where("user_id in (?) OR user_id = ?", current_user).order('created_at DESC')
+      @comment = Comment.new
+    end
     @all_meetups = Meetup.all.order('created_at DESC')
   end
 
