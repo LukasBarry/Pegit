@@ -16,6 +16,8 @@
               <em><strong><%= meetup.user.username %></strong></em><br />
               <em><%= meetup.datetime.strftime("%b %-d, %Y") %></em><br />
               <p><%= meetup.description %></p>
+              <%= link_to 'details', meetup, class:"btn btn-default" %>
+              <br />
               <p><%= meetup.partners.count + 1 %> attending</p>
               <% if user_signed_in? && meetup.user_id != current_user.id%>
                 <% if current_user.partner?(meetup) %>
@@ -25,7 +27,7 @@
                 <% end %>
               <% end %>
             </div>
-          <% end %>
+            <% end %>
         </div>
       </div>
     </div>
@@ -47,20 +49,23 @@
             <% @my_meetups.each do |meetup| %>
               <div class="well">
                 <em><%= meetup.datetime.strftime("%b %-d, %Y")  %></em><br>
-                <%= meetup.description %>
+                <%= meetup.description %><br>
+                <%= link_to 'details', meetup, class:"btn btn-default" %>
+
                 Attending:
                 <% meetup.partners.each do |partner| %>
                 <br />
                   <%= link_to partner.user.username, profile_path(partner.user) %>
                 <br />
                 <% end %>
+                <%= meetup.comments.count %> comments
               </div>
             <% end %>
           <% end %>
         </div>
-        </div>
       </div>
-  <% end %>
+    </div>
+    <% end %>
     </div>
   </div>
 </div>
