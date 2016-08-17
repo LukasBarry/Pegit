@@ -50,16 +50,16 @@
       <div class="panel-heading" role="tab" id="headingOne">
         <h4 class="panel-title">
           <a class="collapsed" role="button"  data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          My PegUps (<%= @my_meetups.count %>)
+          My PegUps (<%= @my_upcoming_meetups.count %>)
           </a>
         </h4>
       </div>
       <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
         <div class="panel-body">
-          <% @my_meetups.each do |meetup| %>
+          <% @my_upcoming_meetups.each do |meetup| %>
             <div class="well">
               <em><%= meetup.datetime.strftime("%b %-d, %Y")  %></em><br>
-              <%= meetup.description %>
+              <%= meetup.description %><br>
               Attending:
               <% meetup.partners.each do |partner| %>
               <br />
@@ -83,18 +83,22 @@
   <div class="col-md-12">
     <div class="panel panel-transparent">
       <div class="panel-heading">
-        Relevant Scorecards
+        <h4>My Best Scorecards (<%= @lowest_scorecards.count %>)</h4>
+        <p><em>These are the ones used to calculate your PegIt index</em></p>
       </div>
-      <% @lowest_scorecards.each do |card| %>
-      <div class="col-md-2">
-        <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
-        <strong><%= card.description %></strong><br>
-        <%= card.id %>
-        Score: <%= card.score %> <br>
-        Course Rating: <%= card.course_rating %><br />
-        Slope Rating: <%= card.course_slope_rating %><br />
+      <div class="panel-body">
+        <% @lowest_scorecards.each do |card| %>
+        <div class="col-md-3">
+          <div class="panel panel-transparent">
+            <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
+            <strong><%= card.description %></strong><br>
+            Score: <%= card.score %> <br>
+            Course Rating: <%= card.course_rating %><br />
+            Slope Rating: <%= card.course_slope_rating %><br />
+          </div>
+        </div>
+        <% end %>
       </div>
-      <% end %>
     </div>
   </div>
 </div>
@@ -103,19 +107,20 @@
     <div class="panel panel-transparent">
       <div class="panel-heading" role="tab" id="headingQ">
         <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseQ" aria-expanded="false" aria-controls="collapseQ">Show All</a>
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseQ" aria-expanded="false" aria-controls="collapseQ">Show Me The Rest</a>
         </h4>
       </div>
       <div id="collapseQ" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingQ">
         <div class="panel-body">
           <% @scorecards.each do |card| %>
-          <div class="col-md-2">
-            <%= card.id %>
-            <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
-            <strong><%= card.description %></strong><br>
-            Score: <%= card.score %> <br>
-            Course Rating: <%= card.course_rating %><br />
-            Slope Rating: <%= card.course_slope_rating %><br />
+          <div class="col-md-3">
+            <div class="panel panel-transparent">
+              <em><%= card.created_at.strftime("%b %-d, %Y") %></em><br />
+              <strong><%= card.description %></strong><br>
+              Score: <%= card.score %> <br>
+              Course Rating: <%= card.course_rating %><br />
+              Slope Rating: <%= card.course_slope_rating %><br />
+            </div>
           </div>
           <% end %>
         </div>
@@ -123,6 +128,5 @@
     </div>
   </div>
 </div>
-
-  <% end %>
-  <% end %>
+<% end %>
+<% end %>

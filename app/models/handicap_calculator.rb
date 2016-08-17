@@ -4,10 +4,11 @@ class HandicapCalculator
   end
 
   def get_handicap_index
-    my_handicaps = Handicap.my_handicaps(@user)
+    my_scorecards = Handicap.my_handicaps(@user)
+    my_scorecards = my_scorecards.reverse.shift(20)
     my_handicap_differentials = []
-    my_handicaps.each do |handicap|
-      my_handicap_differentials << handicap.differential
+    my_scorecards.each do |card|
+      my_handicap_differentials << card.differential
     end
 
     my_handicap_differentials = my_handicap_differentials.sort!
@@ -37,11 +38,7 @@ class HandicapCalculator
 
     average_differential = (needed_differentials.reduce(:+)) / (needed_differentials.length)
     handicap_index = (average_differential * 0.96).round(2)
-    return handicap_index, needed_differentials.length 
+    return handicap_index, needed_differentials.length
   end
 
-  def all_recent
-    my_scorecards = Handicap.my_handicaps(@user)
-    my_scorecards.reverse.shift(20)
-  end
 end
