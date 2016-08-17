@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :handicaps
   has_many :meetups
   has_many :partners
+  has_many :comments
 
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>", :small => "50x50" }, :default_url => "/images/drvl.png"
