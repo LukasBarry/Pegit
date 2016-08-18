@@ -47,6 +47,7 @@
         <% if current_user.id == comment.user.id %>
             <%= link_to 'Edit', edit_meetup_comment_path(@meetup, comment), class:"btn btn-primary" %>
          <% end %>
+        <% end %>
 
     <% if user_signed_in? %>
       <div class="panel panel-transparent">
