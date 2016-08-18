@@ -22,5 +22,4 @@ class User < ActiveRecord::Base
   def lowest_differentials
     self.handicaps.sort { |handicap| handicap.differential}
   end
-
 end

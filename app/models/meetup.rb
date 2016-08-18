@@ -7,4 +7,5 @@ class Meetup < ActiveRecord::Base
   def self.my_meetups(user)
     where(user_id: user.id).order(:created_at)
   end
+
 end

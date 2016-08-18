@@ -10,15 +10,15 @@ class ProfilesController < ApplicationController
       @handicap_index, num = @handicap_calculator.get_handicap_index
       @scorecards = @user.lowest_differentials
       @lowest_scorecards = @scorecards.shift(num)
-    end
 
+    end
+    @all_meetups = Meetup.all
     @meetup = Meetup.new
     @my_meetups = Meetup.my_meetups(@user)
-    @all_meetups = Meetup.all
+    @my_upcoming_meetups = @my_meetups.select {|meetup| meetup.datetime > Time.now}
   end
 
   def index
-
   end
 
 end
