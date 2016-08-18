@@ -1,6 +1,6 @@
 class MeetupsController < ApplicationController
-  before_action :set_meetup, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :set_meetup, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
 
   def new
     @meetup = Meetup.new

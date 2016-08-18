@@ -29,23 +29,20 @@
               <% end %>
             </div>
             <% end %>
+
+<% if user_signed_in? && current_user.id == @user.id %>
+  <div class="col-md-12">
+    <div class="panel-group">
+      <div class="panel panel-responsive">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            My PegUps (<em><%= @my_meetups.count %></em>)
+            </a>
+          </h4>
         </div>
-      </div>
-    </div>
-  <% if user_signed_in? && current_user.id == @user.id %>
-    <div class="panel panel-transparent">
-      <div class="panel-heading" role="tab" id="headingTwo">
-        <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          My PegUps
-          </a>
-        </h4>
-      </div>
-      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-        <div class="panel-body">
-          <%= link_to 'Create New PegUp', new_meetup_path, class:"btn btn-default" %>
-          <br />
-          <br />
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
           <% unless @my_meetups == nil %>
             <% @my_meetups.each do |meetup| %>
               <div class="well">
@@ -60,13 +57,64 @@
                 <% end %>
                 <br />
                 <%= meetup.comments.count %> comments
+              <div class="col-md-4">
+                <div class="panel panel-transparent">
+                  <div class="panel-heading">
+                    <em><%= link_to meetup.datetime.strftime("%b %-d, %Y"), meetup  %></em><br>
+                  </div>
+                  <div class="panel-body">
+                    <%= meetup.description %><br />
+                    <em><%= meetup.comments.count %> comments</em>
+                  </div>
+                  <div class="panel-footer">
+                    <a data-toggle="modal" data-target="#partners" class="btn btn-default"> <%= meetup.partners.count %> Attending </a>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade modal-small" id="partners" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <% meetup.partners.each do |partner| %>
+                      <%= link_to partner.user.username, profile_path(partner.user) %>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             <% end %>
           <% end %>
+          </div>
         </div>
       </div>
     </div>
-    <% end %>
-    </div>
   </div>
+<% end %>
+<div class="row">
+  <div class="col-md-12"></div>
 </div>
+<div class="col-md-12">
+    <% @all_meetups.each do |meetup| %>
+      <div class="col-md-4">
+        <div class="panel panel-transparent">
+          <div class="panel-heading">
+            <em><%= link_to meetup.datetime.strftime("%b %-d, %Y"), meetup %></em><br />
+          </div>
+          <div class="panel-body">
+            <div class="well">
+              <p><%= meetup.description %></p><br>
+              Hosted by: <h4><strong><%= link_to meetup.user.username, profile_path(meetup.user) %></strong></h4>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <p><strong><%= meetup.partners.count + 1 %> attending</strong></p>
+            <% if user_signed_in? && meetup.user_id != current_user.id%>
+              <% if current_user.partner?(meetup) %>
+                <%= link_to "Un-Join this PegUp", meetup_partner_path(meetup), method: :delete, class:"btn btn-default" %>
+              <% else %>
+                <%= link_to "Join this PegUp", meetup_partner_path(meetup), method: :post, class:"btn btn-default" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>

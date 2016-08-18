@@ -15,6 +15,27 @@
         <% end %>
       <% end %>
 
+  <div class="container">
+   <div class="offset-md-2 col-md-8">
+    <div class="panel panel-transparent">
+      <div class="panel-heading">
+        <h2>Meetup hosted by:<em><%= link_to @meetup.user.username, profile_path(@meetup.user) %></em>
+        </h2>
+      </div>
+      <div class="panel-body">
+        <%= @meetup.datetime.strftime("%b %-d, %Y") %><br />
+        <%= @meetup.description %><br><br>
+        <%= @meetup.partners.count + 1 %> attending
+      </div>
+      <div class="panel-footer">
+        <% if user_signed_in? && @meetup.user_id != current_user.id%>
+          <% if current_user.partner?(@meetup) %>
+            <%= link_to "Un-Join this PegUp", meetup_partner_path(@meetup), method: :delete, class:"btn btn-default" %>
+          <% else %>
+            <%= link_to "Join this PegUp", meetup_partner_path(@meetup), method: :post, class:"btn btn-default" %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="panel panel-transparent">
@@ -26,15 +47,35 @@
         <% if current_user.id == comment.user.id %>
             <%= link_to 'Edit', edit_meetup_comment_path(@meetup, comment), class:"btn btn-primary" %>
          <% end %>
+
+    <% if user_signed_in? %>
+      <div class="panel panel-transparent">
+        <div class="panel-heading">
+          <h3>Comments (<%= @meetup.comments.count %>)</h3>
+        </div>
+        <% @meetup.comments.each do |comment| %>
+        <div class="panel-body">
+            <div class="well">
+              from: <em><%= link_to comment.user.username, profile_path(comment.user) %></em><br>
+              <p><%= comment.body %></p><br>
+              <% if current_user.id == comment.user.id %>
+                <%= link_to 'Edit', edit_meetup_comment_path(@meetup, comment), class:"btn btn-default" %>
+              <% end %>
+            </div>
+        </div>
+        <% end %>
       </div>
-      <% end %>
       <% if current_user.partner?(@meetup) %>
-        <div class="well">
-          <h4>Care to comment?</h4>
-          <%= render 'comments/form' %>
+        <div class="panel panel-transparent">
+          <div class="panel-heading">
+            <h4>Care to comment?</h4>
+          </div>
+          <div class="panel-body">
+            <%= render 'comments/form' %>
+          </div>
         </div>
       <% end %>
-    </div>
+    <% end %>
+   </div>
   </div>
-</div>
 </div>
