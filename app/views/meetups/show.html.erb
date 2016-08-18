@@ -4,7 +4,7 @@
 
     <div class="panel panel-transparent">
       <div class="panel-heading">
-        <h2>Meetup hosted by:<em><%= @meetup.user.username %></em>
+        <h2>Meetup hosted by:<em><%= link_to @meetup.user.username, profile_path(@meetup.user) %></em>
         </h2>
       </div>
       <div class="panel-body">
@@ -31,7 +31,7 @@
         <% @meetup.comments.each do |comment| %>
         <div class="panel-body">
             <div class="well">
-              from: <em><%= comment.user.username %></em><br>
+              from: <em><%= link_to comment.user.username, profile_path(comment.user) %></em><br>
               <p><%= comment.body %></p><br>
               <% if current_user.id == comment.user.id %>
                 <%= link_to 'Edit', edit_meetup_comment_path(@meetup, comment), class:"btn btn-default" %>

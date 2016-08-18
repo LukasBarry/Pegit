@@ -20,10 +20,11 @@
 body {
   background-image: url(http://www.golftripper.com/wp-content/uploads/2011/06/Eagle-Point-Golf-Club-Hole-17-1-copy.jpg);
   background-position: top;
+  background-attachment: fixed;
 
 }
 .panel.panel-transparent{
-    background-color: rgba(245, 245, 245, 0.4);
+    background-color: rgba(205, 205, 185, 0.6);
 }
 .panel-heading{
   background-color: rgba(245, 245, 245, 0.1);
