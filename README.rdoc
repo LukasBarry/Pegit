@@ -1,28 +1,17 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+PegIt
 
-Things you may want to cover:
+This application was created for golfers to keep track of their handicap without having to pay an association to keep that information for them. It also allows users to create meetups to find new partners to play with.
 
-* Ruby version
+To get the app started, fork the repository, clone it, then run
+<tt>bundle install</tt>
 
-* System dependencies
+and then
+<tt>rake db:migrate</tt>
 
-* Configuration
+After that, running your rails server should allow access to the app through your local host.
 
-* Database creation
+If you have any additions, please feel free to make them and create a merge request!
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Thanks!
